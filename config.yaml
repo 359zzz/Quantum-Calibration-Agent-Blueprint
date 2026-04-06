@@ -1,0 +1,38 @@
+general:
+  front_end:
+    _type: fastapi
+    host: "0.0.0.0"
+    port: 8000
+    workers: 1
+    reload: true
+    workflow:
+      method: "POST"
+      description: "Deep Agent workflow with filesystem and shell tools"
+      path: "/generate"
+      websocket_path: "/websocket"
+      openai_api_path: "/chat"
+      openai_api_v1_path: "/v1/chat/completions"
+
+# VLM (Vision Language Model) configuration
+vlm:
+  provider: "nvidia"
+  model: "google/gemma-4-31b-it"
+  api_key_env: "NVIDIA_API_KEY"
+  temperature: 0
+  max_tokens: 16384
+
+# Alternative VLM configs:
+# vlm:
+#   provider: "custom"
+#   endpoint: "http://localhost:8001/v1/chat/completions"
+#   model: "/ephemeral/models/NVIDIA-Ising-Calibration-1"
+#   api_key: "dummy-key"
+#   temperature: 0
+#   max_tokens: 16384
+#
+# vlm:
+#   provider: "nvidia"
+#   model: "nvidia/llama-3.1-nemotron-nano-vl-8b-v1"
+#   api_key_env: "NVIDIA_API_KEY"
+#   temperature: 0
+#   max_tokens: 8192

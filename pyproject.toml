@@ -1,0 +1,63 @@
+[project]
+name = "qca"
+version = "0.1.0"
+description = "Quantum Calibration Agent"
+license = "LicenseRef-NvidiaProprietary"
+requires-python = ">=3.11"
+dependencies = [
+    "deepagents>=0.4.0",
+    "deepagents-cli>=0.0.30",
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "h5py",
+    "pyyaml",
+    "httpx",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.22.0",
+    "python-dotenv>=1.0.0",
+    "ripgrep>=14.0.0",
+    "langchain-nvidia-ai-endpoints>=1.2.0",
+]
+
+[project.optional-dependencies]
+vlm = ["kaleido"]
+test = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "pytest-asyncio>=0.20",
+]
+docs = [
+    "sphinx>=7.0",
+    "myst-parser>=2.0",
+    "sphinx-rtd-theme>=2.0",
+    "sphinx-copybutton>=0.5",
+]
+
+[project.scripts]
+qca = "cli:main"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["cli", "prompt", "server"]
+packages = ["tools", "vlm", "core", "scripts"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml", "*.json", "*.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "slow: Slow running tests",
+]
+addopts = [
+    "--strict-markers",
+    "-v",
+]

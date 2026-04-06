@@ -1,154 +1,158 @@
-# __NVIDIA_OSS__ Standard Repo Template
+# QCA - Quantum Calibration Agent
 
-This README file is from the NVIDIA_OSS standard repo template of [PLC-OSS-Template](https://github.com/NVIDIA-GitHub-Management/PLC-OSS-Template?tab=readme-ov-file). It provides a list of files in the PLC-OSS-Template and guidelines on how to use (clone and customize) them.
+![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)
+![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)
 
-**Upon completing the customization for the project repo, the repo admin should replace this README template with the project specific README file.**
+AI-powered quantum device calibration using DeepAgents framework. QCA provides an intelligent agent interface for discovering, executing, and analyzing quantum calibration experiments with support for automated workflows and vision-based analysis.
 
-- Files (org-wide templates in the NVIDIA .github org repo; per-repo overrides allowed) in [PLC-OSS-Template](https://github.com/NVIDIA-GitHub-Management/PLC-OSS-Template?tab=readme-ov-file)
+![Web UI](docs/_static/images/usage/web-ui-overview.png)
+*The Web UI provides a chat interface for natural language interaction with the calibration agent.*
 
-   - Root 
-     - README.md skeleton (CTA + Quickstart + Support/Security/Governance links) 
-     - LICENSE (Apache 2.0 by default)
-        - For other licenses, see the [Confluence page](https://confluence.nvidia.com/pages/viewpage.action?pageId=788418816) for other licenses
-        - CLA.md file (delete if not using MIT or BSD licenses)
-     - CODE_OF_CONDUCT.md 
-     - SECURITY.md (vuln reporting path) 
-     - CONTRIBUTING.md (base; repo can add specifics)
-     - SUPPORT.md (Support levels/channels)
-     - GOVERNANCE.md (baseline; repo may extend)
-     - CITATION.md (for projects that need citation)
+![CLI Interface](docs/_static/images/usage/cli-banner.png)
+*The CLI provides a terminal-based interface for quantum calibration experiments.*
 
-   - .github/ 
-     - ISSUE_TEMPLATE/ (<https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository>)
-       - bug.yml, feature.yml, task.yml, config.yml 
-     - PULL_REQUEST_TEMPLATE.md (<https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository>)
-     - workflows/
-     - Note: workflow-templates/ for starter workflows should live in the org-level .github repo, not per-repo
+## What is QCA?
 
-   - Repo-specific (not org-template, maintained by the team)
-     - CODEOWNERS (place at .github/CODEOWNERS or repo root)
-     - CHANGELOG.md (or RELEASE.md) 
-     - ROADMAP.md 
-     - MAINTAINERS.md 
-     - NOTICE or THIRD_PARTY_NOTICES / THIRD_PARTY_LICENSES (dependency specific)
-     - Build/package files (CMake, pyproject, Dockerfile, etc.)
+QCA (Quantum Calibration Agent) is an AI-powered framework that combines:
 
-   - Recommended structure and hygiene
-     - docs/
-     - examples/
-     - tests/
-     - scripts/
-     - Container/dev env: Dockerfile, docker/, .devcontainer/ (optional)
-     - Build/package (language-specific):
-       - Python: pyproject.toml, setup.cfg/setup.py, requirements.txt, environment.yml
-       - C++: CMakeLists.txt, cmake/, vcpkg.json
-     - Repo hygiene: .gitignore, .gitattributes, .editorconfig, .pre-commit-config.yaml, .clang-format
+- **Intelligent Experiment Discovery**: Automatically find and understand available quantum calibration experiments
+- **AI-Driven Execution**: Run experiments through natural language commands or structured workflows
+- **Visual Analysis**: Inspect plots and data using vision language models (VLMs)
+- **Workflow Automation**: Execute complex multi-step calibration sequences with built-in validation
+- **Smart Data Management**: Store and retrieve experiment results with HDF5 and SQLite
 
+The agent supports multiple LLM providers including NVIDIA, Anthropic, and OpenAI.
 
-## Usage of [PLC-OSS-Template](https://github.com/NVIDIA-GitHub-Management/PLC-OSS-Template?tab=readme-ov-file) for NEW NVIDIA OSS repos
+## Quick Start
 
-1. Clone the [PLC-OSS-Template](https://github.com/NVIDIA-GitHub-Management/PLC-OSS-Template?tab=readme-ov-file)
-2. Find/replace all in the clone of `___PROJECT___` and `__PROJECT_NAME__` with the name of the specific project.
-3. Inspect all files to make sure all replacements work and update text as needed
+### Prerequisites
 
+- Python 3.11+
+- Node.js 18+ and npm 9+ (for Web UI)
+- API Key from one of the supported providers:
+  - [NVIDIA API Catalog](https://build.nvidia.com/) (default)
+  - [Anthropic](https://console.anthropic.com/)
+  - [OpenAI](https://platform.openai.com/)
 
-**What you can reuse immediately**
-- CODE_OF_CONDUCT.md
-- SECURITY.md
-- CONTRIBUTING.md (base)
-- .github/ISSUE_TEMPLATE/.yml (bug/feature/task + config.yml)
-- .github/PULL_REQUEST_TEMPLATE.md
-- Reusable workflows 
+### Installation
 
-**What you must customize per repo**
-- README.md: copy the skeleton and fill in product-specific details (Quickstart, Requirements, Usage, Support level, links)
-- LICENSE: check file is correct, update year, consult Confluence for alternatives https://confluence.nvidia.com/pages/viewpage.action?pageId=788418816, add CLA.md only if your license/process requires it
-- CODEOWNERS: replace <TEAM> with your GitHub team handle(s). Place at .github/CODEOWNERS (or repo root)
-- MAINTAINERS.md: list maintainers names/roles, escalation path
-- CHANGELOG.md (or RELEASE.md): track releases/changes
-- SUPPORT.md: Update for your project
-- ROADMAP.md (optional): upcoming milestones
-- NOTICE / THIRD_PARTY_NOTICES (if you ship third‑party content)
-- Build/package files (CMake/pyproject/Dockerfile/etc.), tests/, docs/, examples/, scripts/ as appropriate
-- Workflows: Edit if you need custom behavior 
-
-
-4. Change git origin to point to new repo and push
-5. Remove the line break below and everything above it
-
-## Usage for existing NVIDIA OSS repos
-
-1. Follow the steps above, but add the files to your existing repo and merge
-
-<!-- REMOVE THE LINE BELOW AND EVERYTHING ABOVE -->
------------------------------------------
-# [Project Title]
-One-sentence value proposition for users. Who is it for, and why it matters. 
-
-# Overview
-What the project does? Why the project is useful?
-Provide a brief overview, highlighting key features or problem-solving capabilities.
-
-# Getting Started
-Guide users on how they can get started with the project. This should include basic installation step, quick-start examples 
 ```bash
-# Option A: Package manager (pip/conda/npm/etc.)
-<copy-paste install>
+# Clone repository
+git clone https://github.com/your-org/qca.git
+cd qca
 
-# Option B: Container
-docker run <image> <args>
+# Set up Python environment
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -e .
 
-# Verify (hello world)
-<one-liner or ~10-line example>
+# Install UI dependencies
+cd ui && npm install && cd ..
+
+# Configure environment
+cp .env.example .env
+# Edit .env and add your API key (choose one):
+# NVIDIA_API_KEY=nvapi-your-key-here
+# ANTHROPIC_API_KEY=sk-ant-your-key-here
+# OPENAI_API_KEY=sk-your-key-here
 ```
-# Requirements
-Include a list of pre-requisites. 
-- OS/Arch: <summary or link to full matrix>
-- Runtime/Compiler: <versions>
-- GPU/Drivers (if applicable): CUDA <ver>, driver <ver>, etc.
 
-# Usage
+### Running QCA
+
+**Option 1: Full System (Backend + Web UI)**
+
 ```bash
-# Minimal runnable snippet (≤20 lines)
-<code>
+# Terminal 1 - Start Backend
+qca serve
+
+# Terminal 2 - Start Web UI
+cd ui && npm run dev
 ```
-- More examples/tutorials: <link>
-- API reference: <link>
 
-# Performance (Optional)
-Summary of benchmarks; link to detailed results and hardware used.
+Open http://localhost:3000 in your browser.
 
-## Releases & Roadmap 
-- Releases/Changelog: <link>
-- (Optional) Next milestones or link to `ROADMAP.md`.
-  
-# Contribution Guidelines
-- Start here: `CONTRIBUTING.md`
-- Code of Conduct: `CODE_OF_CONDUCT.md`
-- Development quickstart (build/test):
+**Option 2: CLI Only**
+
 ```bash
-<clone> && <deps> && <build/test>
+qca
 ```
-## Governance & Maintainers
-- Governance: `GOVERNANCE.md`
-- Maintainers: <team/handles>
-- Labeling/triage policy: <link>
 
-## Security
-- Vulnerability disclosure: `SECURITY.md`
-- Do not file public issues for security reports.
+**Option 3: Non-Interactive Commands**
 
-## Support
-- Level: <Experimental | Maintained | Stable>
-- How to get help: Issues/Discussions/<channel link>
-- Response expectations (if any).
+```bash
+qca experiments list
+qca experiments run t1_measurement
+qca workflow list
+```
 
-# Community
-Provide the channel for community communications.
+## Key Features
 
-# References
-Provide a list of related references
+- **Interactive TUI**: Rich terminal interface for conversational experiment management
+- **Web UI**: Browser-based chat interface with experiment visualization
+- **CLI Commands**: Direct command-line access to all functionality
+- **Experiment Scripts**: Write Python experiments with automatic parameter discovery
+- **Workflow Engine**: JSON-based workflow definitions with state tracking
+- **VLM Integration**: Analyze plots and experimental data visually
+- **History Tracking**: Complete experiment history with SQLite indexing
 
-# License
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-- License: <link>
+## CLI Commands
+
+### Main Commands
+
+| Command | Description |
+|---------|-------------|
+| `qca` | Launch interactive TUI (default) |
+| `qca serve` | Start the backend server |
+| `qca -n "prompt"` | Run single prompt non-interactively |
+| `qca -r <thread_id>` | Resume previous conversation |
+
+### Experiment Management
+
+| Command | Description |
+|---------|-------------|
+| `qca experiments list` | List all available experiments |
+| `qca experiments schema <name>` | Show experiment parameter schema |
+| `qca experiments run <name>` | Execute an experiment |
+
+### Workflow Management
+
+| Command | Description |
+|---------|-------------|
+| `qca workflow list` | List all workflows |
+| `qca workflow show <id>` | Display workflow definition |
+| `qca workflow status <id>` | Check runtime progress |
+
+### History and Data
+
+| Command | Description |
+|---------|-------------|
+| `qca history list` | List past experiment executions |
+| `qca history show <id>` | Show detailed experiment results |
+| `qca data arrays <id>` | List arrays stored in experiment |
+
+## Documentation
+
+Full documentation is available in the `docs/` directory:
+
+```bash
+pip install -e ".[docs]"
+cd docs && make html
+# Open docs/_build/html/index.html
+```
+
+## Development
+
+```bash
+# Install with test dependencies
+pip install -e ".[test]"
+
+# Run tests
+pytest
+
+# Run with coverage
+pytest --cov=core --cov=tools
+```
+
+## License
+
+[Apache License 2.0](LICENSE) - Copyright 2025 NVIDIA Corporation
