@@ -59,9 +59,9 @@ KNOWLEDGE_DIR = ROOT_DIR / "data" / "knowledge"
 SCRIPTS_DIR = ROOT_DIR / "scripts"
 
 # Ensure directories exist
-DATA_DIR.mkdir(exist_ok=True)
-KNOWLEDGE_DIR.mkdir(exist_ok=True)
-SCRIPTS_DIR.mkdir(exist_ok=True)
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+KNOWLEDGE_DIR.mkdir(parents=True, exist_ok=True)
+SCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
 
 # =============================================================================
 # Agent Runtime
