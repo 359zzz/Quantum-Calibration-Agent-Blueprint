@@ -33,7 +33,7 @@ from core import storage
 logger = logging.getLogger(__name__)
 
 # Paths
-DATA_DIR = ROOT_DIR / "data" / "experiments"
+DATA_DIR = ROOT_DIR / "data"
 CONFIG_PATH = ROOT_DIR / "config.yaml"
 
 
