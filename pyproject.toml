@@ -16,13 +16,14 @@ dependencies = [
     "uvicorn>=0.22.0",
     "python-dotenv>=1.0.0",
     "ripgrep>=14.0.0",
-    "langchain-nvidia-ai-endpoints>=1.2.0",
+    "langchain-nvidia-ai-endpoints>=1.2.1",
+    "langchain-core>=1.2.22",
 ]
 
 [project.optional-dependencies]
 vlm = ["kaleido"]
 test = [
-    "pytest>=7.0",
+    "pytest>=9.0.3",
     "pytest-cov>=4.0",
     "pytest-asyncio>=0.20",
 ]
