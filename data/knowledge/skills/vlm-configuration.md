@@ -11,17 +11,19 @@ The VLM (Vision Language Model) is configured in `config.yaml` under the `vlm` s
 ```yaml
 vlm:
   provider: "nvidia"
-  model: "google/gemma-4-31b-it"
+  model: "nvidia/ising-calibration-1-35b-a3b"
   api_key_env: "NVIDIA_API_KEY"
-  temperature: 0
-  max_tokens: 16384
+  temperature: 0.2
+  max_tokens: 32768
+  enable_thinking: false
 ```
 
 ## Supported Models (NVIDIA API)
 
 | Model | Provider | Notes |
 |-------|----------|-------|
-| `google/gemma-4-31b-it` | Google | Default, 31B with thinking |
+| `nvidia/ising-calibration-1-35b-a3b` | NVIDIA | Default, fine-tuned for calibration |
+| `google/gemma-4-31b-it` | Google | General-purpose 31B |
 | `meta/llama-3.2-90b-vision-instruct` | Meta | Most capable |
 | `meta/llama-3.2-11b-vision-instruct` | Meta | Balanced |
 | `microsoft/phi-3.5-vision-instruct` | Microsoft | Lightweight |
