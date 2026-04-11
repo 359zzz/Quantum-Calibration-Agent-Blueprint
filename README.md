@@ -38,8 +38,8 @@ The agent supports multiple LLM providers including NVIDIA, Anthropic, and OpenA
 
 ```bash
 # Clone repository
-git clone https://github.com/your-org/qca.git
-cd qca
+git clone https://github.com/NVIDIA/Ising-Calibration.git
+cd Ising-Calibration
 
 # Set up Python environment
 python -m venv .venv
@@ -155,4 +155,4 @@ pytest --cov=core --cov=tools
 
 ## License
 
-[Apache License 2.0](LICENSE) - Copyright 2025 NVIDIA Corporation
+[Apache License 2.0](LICENSE) - Copyright 2026 NVIDIA Corporation
