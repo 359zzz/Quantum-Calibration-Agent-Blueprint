@@ -31,17 +31,17 @@ general:
 # VLM (Vision Language Model) configuration
 vlm:
   provider: "nvidia"
-  model: "google/gemma-4-31b-it"
+  model: "nvidia/ising-calibration-1-35b-a3b"
   api_key_env: "NVIDIA_API_KEY"
-  temperature: 0
-  max_tokens: 16384
+  temperature: 0.2
+  max_tokens: 32768
+  enable_thinking: false
 
 # Alternative VLM configs:
 # vlm:
-#   provider: "custom"
-#   endpoint: "http://localhost:8001/v1/chat/completions"
-#   model: "/ephemeral/models/NVIDIA-Ising-Calibration-1"
-#   api_key: "dummy-key"
+#   provider: "nvidia"
+#   model: "google/gemma-4-31b-it"
+#   api_key_env: "NVIDIA_API_KEY"
 #   temperature: 0
 #   max_tokens: 16384
 #

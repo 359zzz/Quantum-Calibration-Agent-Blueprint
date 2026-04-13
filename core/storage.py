@@ -33,6 +33,7 @@ def _init_db(data_dir: Path) -> None:
     Args:
         data_dir: Root data directory
     """
+    data_dir.mkdir(parents=True, exist_ok=True)
     db_path = data_dir / "index.db"
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()

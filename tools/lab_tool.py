@@ -28,7 +28,7 @@ from core.models import ExperimentResult
 
 # Paths
 SCRIPTS_DIR = ROOT_DIR / "scripts"
-DATA_DIR = ROOT_DIR / "data" / "experiments"
+DATA_DIR = ROOT_DIR / "data"
 
 
 @tool

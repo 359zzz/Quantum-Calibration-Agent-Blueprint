@@ -110,9 +110,10 @@ class TestCheckType:
         )  # bool is subclass of int but should be rejected
 
     def test_float_type(self):
-        """Float type checking."""
+        """Float type checking — int is accepted since JSON has no int/float distinction."""
         assert _check_type(5.0, "float") is True
-        assert _check_type(5, "float") is False
+        assert _check_type(5, "float") is True
+        assert _check_type(True, "float") is False
 
     def test_str_type(self):
         """String type checking."""

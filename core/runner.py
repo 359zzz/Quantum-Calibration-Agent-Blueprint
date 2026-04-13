@@ -297,5 +297,8 @@ def _check_type(value: any, type_name: str) -> bool:
     # Note: bool is a subclass of int in Python, so check bool before int
     if type_name == "int":
         return isinstance(value, int) and not isinstance(value, bool)
+    elif type_name == "float":
+        # JSON does not distinguish int from float — accept both
+        return isinstance(value, (int, float)) and not isinstance(value, bool)
     else:
         return isinstance(value, expected_type)

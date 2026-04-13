@@ -56,20 +56,23 @@ class NVIDIAProvider(VLMProvider):
         api_key_env: Optional[str] = None,
         temperature: float = 0,
         max_tokens: int = 8192,
+        enable_thinking: Optional[bool] = None,
     ):
         """Initialize NVIDIA provider.
 
         Args:
-            model: NVIDIA model name (e.g., "google/gemma-4-31b-it")
+            model: NVIDIA model name (e.g., "nvidia/ising-calibration-1-35b-a3b")
             api_key: API key (optional, can use api_key_env instead)
             api_key_env: Environment variable name for API key
             temperature: Sampling temperature
             max_tokens: Maximum tokens in response
+            enable_thinking: Enable thinking mode for models that support it
         """
         self.model = model
         self.api_key = api_key or os.environ.get(api_key_env or "", "")
         self.temperature = temperature
         self.max_tokens = max_tokens
+        self.enable_thinking = enable_thinking
 
     async def analyze_images(
         self,
@@ -99,12 +102,15 @@ class NVIDIAProvider(VLMProvider):
             )
 
         try:
-            chat = ChatNVIDIA(
+            kwargs = dict(
                 model=self.model,
                 api_key=self.api_key if self.api_key else None,
                 temperature=self.temperature,
                 max_tokens=self.max_tokens,
             )
+            if self.enable_thinking is not None:
+                kwargs["chat_template_kwargs"] = {"enable_thinking": self.enable_thinking}
+            chat = ChatNVIDIA(**kwargs)
             message = HumanMessage(content=content)
             response = await chat.ainvoke([message])
             return response.content
@@ -278,11 +284,12 @@ def get_vlm_client(config: dict) -> VLMProvider:
 
     if provider in ("nvidia", "litellm"):  # litellm for backwards compat
         return NVIDIAProvider(
-            model=config.get("model", "google/gemma-4-31b-it"),
+            model=config.get("model", "nvidia/ising-calibration-1-35b-a3b"),
             api_key=config.get("api_key"),
             api_key_env=config.get("api_key_env"),
-            temperature=config.get("temperature", 0),
-            max_tokens=config.get("max_tokens", 4096),
+            temperature=config.get("temperature", 0.2),
+            max_tokens=config.get("max_tokens", 32768),
+            enable_thinking=config.get("enable_thinking"),
         )
     elif provider == "anthropic":
         return AnthropicProvider(

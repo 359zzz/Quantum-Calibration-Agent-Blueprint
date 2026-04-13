@@ -4,7 +4,7 @@ User preferences and conventions for workflow planning. Updated by the agent whe
 
 ## Success Criteria
 
-- Qubit spectroscopy: Success = peak found (simplified criteria)
+*No preferences recorded yet.*
 
 ## Parameter Conventions
 
