@@ -43,7 +43,7 @@ css:
 
 navbar-links:
 - type: github
-  value: https://github.com/NVIDIA/Ising-Calibration
+  value: https://github.com/NVIDIA/Quantum-Calibration-Agent-Blueprint
 
 experimental:
   mdx-components:
