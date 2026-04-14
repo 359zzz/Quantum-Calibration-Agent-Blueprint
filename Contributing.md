@@ -1,32 +1,29 @@
 # Contributing
 
-Thank you for your interest in contributing to CUDA-Q! Based on the type of
-contribution, it will fall into three categories:
+Thank you for your interest in contributing to Quantum Calibration Agent
+Blueprint! Based on the type of contribution, it will fall into three categories:
 
 1. Report a bug, feature request, or documentation issue:
 
-    File an [issue][cuda_quantum_issues] describing what you encountered or what
-    you want to see changed. The NVIDIA team will evaluate the issues and triage
+    File an [issue][qca_issues] describing what you encountered or what
+    you want to see changed. The team will evaluate the issues and triage
     them, scheduling them for a release. If you believe the issue needs priority
     attention comment on the issue to notify the team.
 
-1. Share your work built upon CUDA-Q:
+1. Share your work built upon Quantum Calibration Agent Blueprint:
 
     We would love to hear more about your work! Please share with us on
-    [NVIDIA/cudaq GitHub
-    Discussions](https://github.com/NVIDIA/cuda-quantum/discussions) or consider
-    contributing to our [examples](./docs/sphinx/examples/)! We also take any
-    CUDA-Q related questions on this forum.
+    [GitHub Discussions](https://github.com/NVIDIA/Quantum-Calibration-Agent-Blueprint/discussions).
+    We also take any related questions on this forum.
 
 1. Implement a feature or bug-fix:
 
-    Please file an [issue][cuda_quantum_issues] on the repository and express
-    your interest in contributing to its implementation. Someone from the CUDA-Q
+    Please file an [issue][qca_issues] on the repository and express
+    your interest in contributing to its implementation. Someone from the
     team will respond on the issue to discuss how to best proceed with the
-    suggestion. For more information regarding contributing to the code base,
-    see also [Developing.md](./Developing.md).
+    suggestion.
 
-[cuda_quantum_issues]: https://github.com/NVIDIA/cuda-quantum/issues
+[qca_issues]: https://github.com/NVIDIA/Quantum-Calibration-Agent-Blueprint/issues
 
 When you contribute code to this repository, whether be it an example, bug fix,
 or feature, make sure that you can contribute your work under the used
@@ -48,26 +45,6 @@ committing your changes:
 ```bash
 git commit -s -m "Add cool feature."
 ```
-
-### Automated Checks with Pre-commit
-
-Before submitting a pull request, we recommend running automated checks locally
-to catch formatting and linting issues early:
-
-```bash
-# One-time setup
-pip install pre-commit
-pre-commit install
-
-# Run all checks (same as CI)
-pre-commit run --all-files --hook-stage pre-push
-```
-
-All pre-commit checks that run in CI can be run locally. This helps reduce
-CI churn from formatting issues. See [Developing.md](Developing.md) for detailed
-pre-commit usage and troubleshooting.
-
----
 
 This will append the following to your commit message:
 
