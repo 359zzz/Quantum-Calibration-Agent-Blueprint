@@ -51,6 +51,7 @@ import typer
 from rich.console import Console
 from rich.live import Live
 from rich.table import Table
+from core.chat_models import create_chat_model, get_default_model
 
 # Load environment variables from .env
 from dotenv import load_dotenv
@@ -62,31 +63,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 __version__ = "0.1.0"
 
 # Default model for QCA
-DEFAULT_MODEL = os.environ.get("QCA_MODEL", "nvidia:nvidia/nemotron-3-nano-30b-a3b")
-
-
-def create_chat_model(model_name: str):
-    """Create chat model based on provider.
-
-    Uses official langchain-nvidia-ai-endpoints for NVIDIA models,
-    init_chat_model for other providers.
-
-    Returns:
-        Tuple of (model, supports_streaming).
-    """
-    if model_name.startswith("nvidia:"):
-        from langchain_nvidia_ai_endpoints import ChatNVIDIA
-        return ChatNVIDIA(
-            model=model_name[7:],  # strip "nvidia:" prefix
-            api_key=os.environ.get("NVIDIA_API_KEY"),
-            disable_streaming=True,
-        ), False
-    else:
-        from langchain.chat_models import init_chat_model
-        params = {}
-        if model_name.startswith("openai:"):
-            params["use_responses_api"] = False
-        return init_chat_model(model_name, **params), True
+DEFAULT_MODEL = get_default_model()
 
 # Rich console for output
 console = Console()

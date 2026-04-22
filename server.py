@@ -44,6 +44,7 @@ from deepagents import create_deep_agent
 from deepagents.backends.local_shell import LocalShellBackend
 
 from core import storage, discovery
+from core.chat_models import create_chat_model, get_default_model
 from prompt import load_system_prompt
 
 # Load environment
@@ -67,28 +68,7 @@ SCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
 # Agent Runtime
 # =============================================================================
 
-DEFAULT_MODEL = os.environ.get("QCA_MODEL", "nvidia:nvidia/nemotron-3-nano-30b-a3b")
-
-
-def create_chat_model(model_name: str):
-    """Create chat model based on provider.
-
-    Uses official langchain-nvidia-ai-endpoints for NVIDIA models,
-    init_chat_model for other providers.
-    """
-    if model_name.startswith("nvidia:"):
-        from langchain_nvidia_ai_endpoints import ChatNVIDIA
-        return ChatNVIDIA(
-            model=model_name[7:],  # strip "nvidia:" prefix
-            api_key=os.environ.get("NVIDIA_API_KEY"),
-            disable_streaming=True,  # NVIDIA has truncation bug with streaming
-        )
-    else:
-        from langchain.chat_models import init_chat_model
-        params = {}
-        if model_name.startswith("openai:"):
-            params["use_responses_api"] = False
-        return init_chat_model(model_name, **params)
+DEFAULT_MODEL = get_default_model()
 
 
 def load_tools() -> list:
@@ -144,7 +124,7 @@ def create_agent():
     # }
     interrupt_on = {}
 
-    chat_model = create_chat_model(DEFAULT_MODEL)
+    chat_model, _supports_streaming = create_chat_model(DEFAULT_MODEL)
 
     agent = create_deep_agent(
         model=chat_model,
